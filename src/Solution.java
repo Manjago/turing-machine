@@ -1,6 +1,9 @@
-import java.util.*;
-import java.io.*;
-import java.math.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Scanner;
 import java.util.stream.Collectors;
 
 /**
@@ -66,16 +69,14 @@ class Turing {
             int currSymbol = tape[pos];
             Instruction instruction = instructions.get(state).get(currSymbol);
             tape[pos] = instruction.symbolToWrite;
-            int newPos = pos;
             if (instruction.moveLeft) {
-                --newPos;
+                --pos;
             } else {
-                ++newPos;
+                ++pos;
             }
-            if (newPos < 0 || newPos >= tape.length) {
+            if (pos < 0 || pos >= tape.length) {
                 return;
             }
-            pos = newPos;
 
             if (instruction.nextState.equals("HALT")) {
                 return;
